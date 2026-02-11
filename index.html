@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Finance Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <main class="dashboard">
+
+    <header>
+      <h1>Finance Overview</h1>
+      <p>Revenue performance and transaction insights</p>
+    </header>
+
+    <!-- STATS -->
+    <section class="stats-grid">
+      <div class="stat-card glass">
+        <p>Total Revenue</p>
+        <h2>$128,420</h2>
+      </div>
+
+      <div class="stat-card glass">
+        <p>Monthly Growth</p>
+        <h2>+12.4%</h2>
+      </div>
+
+      <div class="stat-card glass">
+        <p>Expenses</p>
+        <h2>$42,300</h2>
+      </div>
+
+      <div class="stat-card glass">
+        <p>Net Profit</p>
+        <h2>$86,120</h2>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="content-grid">
+
+      <div class="panel glass">
+        <h3>Revenue Growth</h3>
+        <div class="line-chart">
+          <div class="line"></div>
+        </div>
+      </div>
+
+      <div class="panel glass">
+        <h3>Recent Transactions</h3>
+        <ul class="transactions">
+          <li>Stripe Payment <span class="positive">+$1,200</span></li>
+          <li>Server Hosting <span class="negative">-$320</span></li>
+          <li>Subscription Sale <span class="positive">+$850</span></li>
+          <li>Marketing Ads <span class="negative">-$540</span></li>
+        </ul>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
