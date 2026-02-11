@@ -1,18 +1,12 @@
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: var(--blur);
+  backdrop-filter: blur(18px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
 }
 
-/* STAT CARD */
 .stat-card {
   padding: 28px;
-  transition: 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
 }
 
 .stat-card p {
@@ -25,7 +19,6 @@
   font-size: 1.8rem;
 }
 
-/* PANEL */
 .panel {
   padding: 28px;
 }
@@ -35,34 +28,6 @@
   color: var(--blue-light);
 }
 
-/* LINE CHART (CSS FAKE BUT PROFESSIONAL) */
-.line-chart {
-  height: 220px;
-  position: relative;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.04);
-}
-
-.line-chart::after {
-  content: "";
-  position: absolute;
-  inset: 20px;
-  border-left: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.line {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  width: 85%;
-  height: 120px;
-  background: linear-gradient(to top, rgba(56,189,248,0.2), transparent);
-  border-top: 3px solid #38bdf8;
-  border-radius: 12px;
-}
-
-/* TRANSACTION LIST */
 .transactions {
   list-style: none;
 }
