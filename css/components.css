@@ -28,6 +28,13 @@
   color: var(--blue-light);
 }
 
+/* CRITICAL: chart container height */
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
+
 .transactions {
   list-style: none;
 }
