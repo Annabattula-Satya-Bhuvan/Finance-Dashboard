@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -46,9 +49,7 @@
 
       <div class="panel glass">
         <h3>Revenue Growth</h3>
-        <div class="line-chart">
-          <div class="line"></div>
-        </div>
+        <canvas id="revenueChart"></canvas>
       </div>
 
       <div class="panel glass">
