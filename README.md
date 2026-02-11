@@ -1,19 +1,12 @@
 # 💎 Advanced Finance Dashboard
 
-Premium black & light blue glassmorphic finance dashboard.
+Premium black & light blue glassmorphic finance dashboard with working Chart.js revenue analytics.
 
 ## Features
+- Real Revenue Growth Line Chart
+- Glassmorphic UI
 - Modular CSS structure
-- Light glassmorphism
-- Revenue analytics section
-- Transaction panel
-- SaaS-style layout
+- Professional SaaS layout
 
-## Stack
-HTML, CSS, JavaScript
-
-## Future Improvements
-- Integrate Chart.js
-- Connect real API data
-- Add filters (Weekly / Monthly)
-- Add dark/light toggle
+## Tech
+HTML, CSS, JavaScript, Chart.js
