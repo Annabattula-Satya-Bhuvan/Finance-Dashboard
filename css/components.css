@@ -29,11 +29,15 @@
 }
 
 /* CRITICAL: chart container height */
+/* FIXED CHART SIZE */
 .chart-container {
   position: relative;
-  height: 300px;
+  height: 260px;      /* fixed height */
+  max-height: 260px;  /* prevent stretching */
   width: 100%;
+  overflow: hidden;   /* prevent overflow */
 }
+
 
 .transactions {
   list-style: none;
