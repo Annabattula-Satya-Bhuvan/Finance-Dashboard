@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const ctx = document.getElementById("revenueChart");
   if (!ctx) return;
 
-  let priceHistory = [];
+  let revenueHistory = [];
   let timeLabels = [];
 
   const chart = new Chart(ctx, {
@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
     data: {
       labels: timeLabels,
       datasets: [{
-        label: "AAPL Price ($)",
-        data: priceHistory,
+        label: "Total Revenue ($)",
+        data: revenueHistory,
         borderColor: "#38bdf8",
         backgroundColor: "rgba(56,189,248,0.2)",
         fill: true,
@@ -24,9 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
-          labels: { color: "#e6f1ff" }
-        }
+        legend: { labels: { color: "#e6f1ff" } }
       },
       scales: {
         x: {
@@ -43,49 +41,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function fetchMarketData() {
     try {
-      const response = await fetch(
-        "https://query1.finance.yahoo.com/v7/finance/quote?symbols=AAPL,^GSPC"
-      );
 
+      const proxyUrl = "https://api.allorigins.win/raw?url=";
+      const targetUrl =
+        "https://query1.finance.yahoo.com/v7/finance/quote?symbols=^GSPC";
+
+      const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
       const data = await response.json();
-      const results = data.quoteResponse.result;
 
-      const apple = results.find(item => item.symbol === "AAPL");
-      const sp500 = results.find(item => item.symbol === "^GSPC");
+      const market = data.quoteResponse.result[0];
+      const marketPrice = market.regularMarketPrice;
+      const marketChange = market.regularMarketChangePercent;
 
-      if (!apple || !sp500) return;
+      // Generate business metrics based on live market
+      const totalRevenue = marketPrice * 1000;
+      const monthlyGrowth = marketChange;
+      const expenses = totalRevenue * 0.35;
+      const netProfit = totalRevenue - expenses;
 
-      const price = apple.regularMarketPrice;
-      const change = apple.regularMarketChangePercent;
-      const spPrice = sp500.regularMarketPrice;
+      // Update UI
+      document.querySelectorAll(".stat-card h2")[0].textContent =
+        "$" + totalRevenue.toFixed(0);
 
-      document.getElementById("stock-price").textContent =
-        "$" + price.toFixed(2);
+      document.querySelectorAll(".stat-card h2")[1].textContent =
+        monthlyGrowth.toFixed(2) + "%";
 
-      const changeElement = document.getElementById("stock-change");
-      changeElement.textContent = change.toFixed(2) + "%";
-      changeElement.style.color = change >= 0 ? "#22c55e" : "#ef4444";
+      document.querySelectorAll(".stat-card h2")[2].textContent =
+        "$" + expenses.toFixed(0);
 
-      document.getElementById("sp500-price").textContent =
-        "$" + spPrice.toFixed(2);
+      document.querySelectorAll(".stat-card h2")[3].textContent =
+        "$" + netProfit.toFixed(0);
 
-      document.getElementById("last-updated").textContent =
-        new Date().toLocaleTimeString();
+      // Color growth
+      const growthElement = document.querySelectorAll(".stat-card h2")[1];
+      growthElement.style.color =
+        monthlyGrowth >= 0 ? "#22c55e" : "#ef4444";
 
       // Update chart
-      if (priceHistory.length >= 20) {
-        priceHistory.shift();
+      if (revenueHistory.length >= 20) {
+        revenueHistory.shift();
         timeLabels.shift();
       }
 
-      priceHistory.push(price);
+      revenueHistory.push(totalRevenue);
       timeLabels.push(new Date().toLocaleTimeString());
 
       chart.update();
 
     } catch (error) {
-      document.getElementById("status").textContent = "Error";
-      document.getElementById("status").className = "negative";
       console.error("Fetch error:", error);
     }
   }
