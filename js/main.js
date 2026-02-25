@@ -16,55 +16,42 @@ document.addEventListener("DOMContentLoaded", function () {
         borderColor: "#38bdf8",
         backgroundColor: "rgba(56,189,248,0.2)",
         fill: true,
-        tension: 0.4,
-        pointRadius: 3
+        tension: 0.4
       }]
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { labels: { color: "#e6f1ff" } }
-      },
-      scales: {
-        x: {
-          ticks: { color: "#8fb8ff" },
-          grid: { color: "rgba(255,255,255,0.05)" }
-        },
-        y: {
-          ticks: { color: "#8fb8ff" },
-          grid: { color: "rgba(255,255,255,0.05)" }
-        }
-      }
+      maintainAspectRatio: false
     }
   });
 
   async function fetchMarketData() {
     try {
 
-      const proxy = "https://api.allorigins.win/raw?url=";
-      const url = "https://query1.finance.yahoo.com/v7/finance/quote?symbols=^GSPC";
+      const response = await fetch(
+        "https://financialmodelingprep.com/api/v3/quote/%5EGSPC?apikey=demo"
+      );
 
-      const response = await fetch(proxy + encodeURIComponent(url));
       const data = await response.json();
+      if (!data || data.length === 0) return;
 
-      const market = data.quoteResponse.result[0];
-      const marketPrice = market.regularMarketPrice;
-      const marketChange = market.regularMarketChangePercent;
+      const marketPrice = data[0].price;
+      const marketChange = data[0].changesPercentage;
 
-      // Generate Business Metrics
+      // Generate business metrics
       const revenue = marketPrice * 1000;
       const growth = marketChange;
       const expenses = revenue * 0.4;
       const profit = revenue - expenses;
 
-      // Update UI
+      // Update numbers
       document.getElementById("revenue").textContent =
         "$" + revenue.toFixed(0);
 
       const growthElement = document.getElementById("growth");
       growthElement.textContent = growth.toFixed(2) + "%";
-      growthElement.style.color = growth >= 0 ? "#22c55e" : "#ef4444";
+      growthElement.style.color =
+        growth >= 0 ? "#22c55e" : "#ef4444";
 
       document.getElementById("expenses").textContent =
         "$" + expenses.toFixed(0);
@@ -72,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("profit").textContent =
         "$" + profit.toFixed(0);
 
-      // Update Chart
+      // Update chart
       if (revenueHistory.length >= 20) {
         revenueHistory.shift();
         timeLabels.shift();
@@ -85,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (error) {
       document.getElementById("status").textContent = "Error";
       document.getElementById("status").className = "negative";
-      console.error("Error:", error);
+      console.error("Fetch error:", error);
     }
   }
 
