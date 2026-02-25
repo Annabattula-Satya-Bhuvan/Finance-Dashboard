@@ -18,42 +18,39 @@
 
     <header>
       <h1>Finance Overview</h1>
-      <p>Live Market Performance (Updates Every Minute)</p>
+      <p>Live Business Metrics (Auto Updates Every Minute)</p>
     </header>
 
     <section class="stats-grid">
       <div class="stat-card glass">
-        <p>Apple (AAPL)</p>
-        <h2 id="stock-price">Loading...</h2>
+        <p>Total Revenue</p>
+        <h2 id="revenue">$0</h2>
       </div>
-
       <div class="stat-card glass">
-        <p>Change %</p>
-        <h2 id="stock-change">Loading...</h2>
+        <p>Monthly Growth</p>
+        <h2 id="growth">0%</h2>
       </div>
-
       <div class="stat-card glass">
-        <p>S&P 500</p>
-        <h2 id="sp500-price">Loading...</h2>
+        <p>Expenses</p>
+        <h2 id="expenses">$0</h2>
       </div>
-
       <div class="stat-card glass">
-        <p>Last Updated</p>
-        <h2 id="last-updated">--</h2>
+        <p>Net Profit</p>
+        <h2 id="profit">$0</h2>
       </div>
     </section>
 
     <section class="content-grid">
 
       <div class="panel glass">
-        <h3>Apple Price Trend</h3>
+        <h3>Revenue Trend</h3>
         <div class="chart-container">
           <canvas id="revenueChart"></canvas>
         </div>
       </div>
 
       <div class="panel glass">
-        <h3>Market Info</h3>
+        <h3>System Status</h3>
         <ul class="transactions">
           <li>Data Source <span class="positive">Yahoo Finance</span></li>
           <li>Refresh Rate <span class="positive">60 sec</span></li>
