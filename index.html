@@ -18,44 +18,46 @@
 
     <header>
       <h1>Finance Overview</h1>
-      <p>Revenue performance and transaction insights</p>
+      <p>Live Market Performance (Updates Every Minute)</p>
     </header>
 
     <section class="stats-grid">
       <div class="stat-card glass">
-        <p>Total Revenue</p>
-        <h2>$128,420</h2>
+        <p>Apple (AAPL)</p>
+        <h2 id="stock-price">Loading...</h2>
       </div>
+
       <div class="stat-card glass">
-        <p>Monthly Growth</p>
-        <h2>+12.4%</h2>
+        <p>Change %</p>
+        <h2 id="stock-change">Loading...</h2>
       </div>
+
       <div class="stat-card glass">
-        <p>Expenses</p>
-        <h2>$42,300</h2>
+        <p>S&P 500</p>
+        <h2 id="sp500-price">Loading...</h2>
       </div>
+
       <div class="stat-card glass">
-        <p>Net Profit</p>
-        <h2>$86,120</h2>
+        <p>Last Updated</p>
+        <h2 id="last-updated">--</h2>
       </div>
     </section>
 
     <section class="content-grid">
 
       <div class="panel glass">
-        <h3>Revenue Growth</h3>
+        <h3>Apple Price Trend</h3>
         <div class="chart-container">
           <canvas id="revenueChart"></canvas>
         </div>
       </div>
 
       <div class="panel glass">
-        <h3>Recent Transactions</h3>
+        <h3>Market Info</h3>
         <ul class="transactions">
-          <li>Stripe Payment <span class="positive">+$1,200</span></li>
-          <li>Server Hosting <span class="negative">-$320</span></li>
-          <li>Subscription Sale <span class="positive">+$850</span></li>
-          <li>Marketing Ads <span class="negative">-$540</span></li>
+          <li>Data Source <span class="positive">Yahoo Finance</span></li>
+          <li>Refresh Rate <span class="positive">60 sec</span></li>
+          <li>Status <span id="status" class="positive">Live</span></li>
         </ul>
       </div>
 
