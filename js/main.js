@@ -42,54 +42,50 @@ document.addEventListener("DOMContentLoaded", function () {
   async function fetchMarketData() {
     try {
 
-      const proxyUrl = "https://api.allorigins.win/raw?url=";
-      const targetUrl =
-        "https://query1.finance.yahoo.com/v7/finance/quote?symbols=^GSPC";
+      const proxy = "https://api.allorigins.win/raw?url=";
+      const url = "https://query1.finance.yahoo.com/v7/finance/quote?symbols=^GSPC";
 
-      const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+      const response = await fetch(proxy + encodeURIComponent(url));
       const data = await response.json();
 
       const market = data.quoteResponse.result[0];
       const marketPrice = market.regularMarketPrice;
       const marketChange = market.regularMarketChangePercent;
 
-      // Generate business metrics based on live market
-      const totalRevenue = marketPrice * 1000;
-      const monthlyGrowth = marketChange;
-      const expenses = totalRevenue * 0.35;
-      const netProfit = totalRevenue - expenses;
+      // Generate Business Metrics
+      const revenue = marketPrice * 1000;
+      const growth = marketChange;
+      const expenses = revenue * 0.4;
+      const profit = revenue - expenses;
 
       // Update UI
-      document.querySelectorAll(".stat-card h2")[0].textContent =
-        "$" + totalRevenue.toFixed(0);
+      document.getElementById("revenue").textContent =
+        "$" + revenue.toFixed(0);
 
-      document.querySelectorAll(".stat-card h2")[1].textContent =
-        monthlyGrowth.toFixed(2) + "%";
+      const growthElement = document.getElementById("growth");
+      growthElement.textContent = growth.toFixed(2) + "%";
+      growthElement.style.color = growth >= 0 ? "#22c55e" : "#ef4444";
 
-      document.querySelectorAll(".stat-card h2")[2].textContent =
+      document.getElementById("expenses").textContent =
         "$" + expenses.toFixed(0);
 
-      document.querySelectorAll(".stat-card h2")[3].textContent =
-        "$" + netProfit.toFixed(0);
+      document.getElementById("profit").textContent =
+        "$" + profit.toFixed(0);
 
-      // Color growth
-      const growthElement = document.querySelectorAll(".stat-card h2")[1];
-      growthElement.style.color =
-        monthlyGrowth >= 0 ? "#22c55e" : "#ef4444";
-
-      // Update chart
+      // Update Chart
       if (revenueHistory.length >= 20) {
         revenueHistory.shift();
         timeLabels.shift();
       }
 
-      revenueHistory.push(totalRevenue);
+      revenueHistory.push(revenue);
       timeLabels.push(new Date().toLocaleTimeString());
-
       chart.update();
 
     } catch (error) {
-      console.error("Fetch error:", error);
+      document.getElementById("status").textContent = "Error";
+      document.getElementById("status").className = "negative";
+      console.error("Error:", error);
     }
   }
 
